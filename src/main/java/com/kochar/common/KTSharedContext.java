@@ -11,7 +11,7 @@ package com.kochar.common;
  */
 public class KTSharedContext {
     
-    public static final String DBCONN_DBIP = "localhost";
+    public static final String DBCONN_DBIP = "localhost:5433";
     public static final String DBCONN_DBNAME = "postgres";
     public static final String DBCONN_DBUNAME = "postgres";
     public static final String DBCONN_DBUPASS = "postgres";
