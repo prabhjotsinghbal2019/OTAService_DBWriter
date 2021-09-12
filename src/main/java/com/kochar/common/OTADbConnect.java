@@ -25,7 +25,7 @@ public class OTADbConnect {
     //
     private Connection dbConn = null;
 
-    public static OTADbConnect getInstance(int instId) throws SQLException {
+    public static OTADbConnect getInstance(int instId) {
         if (null == dbConnect_Instances[instId]) {
             dbConnect_Instances[instId] = new OTADbConnect();
         }

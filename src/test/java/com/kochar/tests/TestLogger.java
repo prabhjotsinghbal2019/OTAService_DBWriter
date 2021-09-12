@@ -23,12 +23,10 @@ import org.junit.jupiter.api.Test;
 public class TestLogger {
     
     public TestLogger() {
-        //        System.out.println("TestLogger ctor() called");
     }
     
     @BeforeAll
     public static void setUpClass() {
-        System.out.println("setUpClass called");
         KSimpleLogger.Instance().SetSpeed(Throttle.RunSpeed.Fastest);
         KSimpleLogger.Instance().Start();
         KSimpleLogger.Instance().SendMessage(new ServiceMessage(new LogItem(Level.INFO, TestLogger.class.getName(), "setUpClass()", "KSimpleLogger Initialized", null)));
@@ -36,7 +34,6 @@ public class TestLogger {
     
     @AfterAll
     public static void tearDownClass() {
-        System.out.println("tearDownClass called");
         KSimpleLogger.Instance().SendMessage(new ServiceMessage(new LogItem(Level.INFO, TestLogger.class.getName(), "tearDownClass()", "KSimpleLogger DeInitialized", null)));
         KSimpleLogger.Instance().Stop();
         KSimpleLogger.releaseInstance();
@@ -44,12 +41,10 @@ public class TestLogger {
     
     @BeforeEach
     public void setUp() {
-//        System.out.println("setUp called");
     }
     
     @AfterEach
     public void tearDown() {
-//        System.out.println("tearDown called");
     }
 
     // TODO add test methods here.
@@ -59,7 +54,6 @@ public class TestLogger {
     // public void hello() {}
     @Test
     public void testLogging() {
-        System.out.println("testLogging test called");
         KSimpleLogger.Instance().SendMessage(new ServiceMessage(new LogItem(Level.INFO, TestLogger.class.getName(), "testLogging()", "KSimpleLogger testLogging", null)));
     }
 }
