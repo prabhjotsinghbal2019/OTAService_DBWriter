@@ -33,7 +33,7 @@ public class DBStatusWriterService extends ServiceAttribute {
         }
     }
 
-    private final int MaxBatchAge = 4;
+    private final int MaxBatchAge = 2;
     private final int MaxQueueSize = 1000;
     private int batchSize = 0;
     private long LastFlushed = 0;
@@ -44,7 +44,7 @@ public class DBStatusWriterService extends ServiceAttribute {
     
 
     public DBStatusWriterService() {
-        SpeedControl = new Throttle(1000, 500, 4, 2000, 3000, 5000);
+        SpeedControl = new Throttle(1000, 500, 2, 2000, 3000, 5000);
         //Heartbeat = (IHeartbeat) PULSE_HANDLER.build(this, "heartbeat");
         LastFlushed = System.currentTimeMillis();
         //init();

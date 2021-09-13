@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,11 +50,36 @@ public class TestOTADBConnect {
     
     @BeforeEach
     public void setUp() {
+        clearOTAStatusTables();
     }
     
     @AfterEach
     public void tearDown() {
+        clearOTAStatusTables();
     }
+    
+    private void clearOTAStatusTables() {
+        
+        try {
+            
+            Statement stmt = OTADbConnect.getInstance(OTADbConnect.DBCONN_DBHEALTHMONITOR).getConnection().createStatement();
+            
+            String sqlDel1 = "DELETE FROM ota_bulk_master WHERE otaid > 0";
+            String sqlDel2 = "DELETE FROM ota_bulk_otastatus WHERE otaid > 0";
+            
+            stmt.executeUpdate(sqlDel1);
+            stmt.executeUpdate(sqlDel2);
+            
+            stmt.close();
+            
+        } catch (SQLException ex) {
+            KSimpleLogger.Instance().SendMessage(new ServiceMessage(new LogItem(Level.SEVERE, TestOTADBConnect.class.getName(), "clearOTAStatusTables()", ex.toString(), ex)));            
+        } finally {
+            OTADbConnect.ReleaseInstance(OTADbConnect.DBCONN_DBHEALTHMONITOR);
+        }
+        
+    }
+
 
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
